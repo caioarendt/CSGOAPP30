@@ -90,22 +90,22 @@ public class Login extends AppCompatActivity {
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
         return super.onOptionsItemSelected(item);
     }
 
     public void login(View view){
-        if(!inputValidation.isValidEmail(edtEmail.getText().toString()) || inputValidation.isEmpty(edtEmail.getText().toString()) || inputValidation.isEmpty(edtPassword.getText().toString())){
-            if(databaseHelper.checkUser(edtEmail.toString().trim(), edtPassword.toString().trim())){
+        if(inputValidation.isValidEmail(edtEmail.getText().toString()) || !inputValidation.isStringEmpty(edtEmail.getText().toString()) || !inputValidation.isStringEmpty(edtPassword.getText().toString())){
+            if(databaseHelper.checkUser(edtEmail.getText().toString().trim(), edtPassword.getText().toString().trim())){
                 Intent intent = new Intent(this, Main.class);
                 intent.putExtra("email", edtEmail.getText().toString().trim());
                 emptyEditText();
                 startActivity(intent);
             }else{
-                edtPassword.setError("Wrong email or password!");
+                if(!databaseHelper.checkUser(edtEmail.getText().toString().trim())){
+                  edtEmail.setError("Wrong email!");
+                }else {
+                    edtPassword.setError("Wrong password!");
+                }
             }
         }else{
             edtPassword.setError("Please fill in a valid email and password!");
@@ -113,6 +113,6 @@ public class Login extends AppCompatActivity {
     }
 
     public void register(View view){
-
+        startActivity (new Intent(this, Register.class));
     }
 }

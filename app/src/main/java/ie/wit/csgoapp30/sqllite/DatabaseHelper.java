@@ -202,6 +202,30 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return matches;
     }
 
+    public Match getMatch(int id) {
+
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        String[] allColumns = {
+                match_id,
+                team1,
+                team2,
+                date,
+                time
+        };
+
+        Cursor cursor = db.query(table_matches,allColumns,match_id + "=?",new String[]{String.valueOf(id)},null,null, null, null);
+        if (cursor != null) {
+            cursor.moveToNext();
+
+            Match e = new Match(Integer.parseInt(cursor.getString(0)), cursor.getString(1), cursor.getString(2), cursor.getString(3), cursor.getString(4));
+            // return Employee
+            return e;
+        }else{
+            return null;
+        }
+    }
+
     /**
      * This method to update user record
      *

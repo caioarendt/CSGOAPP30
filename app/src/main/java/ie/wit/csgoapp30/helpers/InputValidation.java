@@ -1,6 +1,7 @@
 package ie.wit.csgoapp30.helpers;
 
 import android.content.Context;
+import android.text.TextUtils;
 import android.util.Patterns;
 
 /**
@@ -15,16 +16,16 @@ public class InputValidation {
         this.context = context;
     }
 
-    public static boolean isEmpty(String text){
+    public static boolean isStringEmpty(String text){
         return text.trim().isEmpty();
     }
 
     public static boolean isValidEmail(String email) {
 
-        if(isEmpty(email) || !Patterns.EMAIL_ADDRESS.matcher(email).matches()){
+        if (TextUtils.isEmpty(email)) {
             return false;
-        }else{
-            return true;
+        } else {
+            return android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches();
         }
     }
 
