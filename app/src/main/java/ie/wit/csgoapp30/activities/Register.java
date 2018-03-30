@@ -1,5 +1,6 @@
 package ie.wit.csgoapp30.activities;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -50,7 +51,7 @@ public class Register extends AppCompatActivity {
             user.setPassword(edtPassword.getText().toString().trim());
 
             databaseHelper.addUser(user);
-            Toast t = Toast.makeText(this, "New account registered!", Toast.LENGTH_SHORT);
+            Toast t = Toast.makeText(this, user.getName().toString() + " registered!", Toast.LENGTH_SHORT);
             t.show();
             finish();
         }
@@ -58,6 +59,7 @@ public class Register extends AppCompatActivity {
 
     public void cancel(View view){
         finish();
+        startActivity(new Intent(this, Login.class));
     }
 
     public void initObjects(){

@@ -24,7 +24,9 @@
             android:label="@string/title_activity_main"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".activities.Register" />
-        <activity android:name=".activities.Create"></activity>
+        <activity android:name=".activities.Create" />
+        <activity android:name=".Edit" />
+        <activity android:name=".activities.Edit"></activity>
     </application>
 
 </manifest>

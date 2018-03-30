@@ -17,6 +17,13 @@ public class User {
 
     }
 
+    public User(int id, String name, String email, String password){
+        this.id = id;
+        this.name = name;
+        this.email = email;
+        this.password = password;
+    }
+
     public User(String name, String email, String password){
         this.name = name;
         this.email = email;
@@ -55,4 +62,11 @@ public class User {
         this.password = password;
     }
 
+    public String toString(){
+        return "ID : " +getId()+ "\n"+
+                "Name : " +getName()+ "\n" +
+                "Email : "+getEmail() + "\n" +
+                "Passowrd : "+getPassword();
+
+    }
 }

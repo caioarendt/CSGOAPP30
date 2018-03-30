@@ -202,6 +202,34 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return matches;
     }
 
+    public User getUser(String email){
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        String[] columns = {
+                COLUMN_USER_ID,
+                COLUMN_USER_NAME,
+                COLUMN_USER_EMAIL,
+                COLUMN_USER_PASSWORD
+        };
+
+        Cursor cursor = db.query(TABLE_USER, //Table to query
+                columns,    //columns to return
+                COLUMN_USER_EMAIL + "=?",        //columns for the WHERE clause
+                new String[]{(email)},        //The values for the WHERE clause
+                null,       //group the rows
+                null,       //filter by row groups
+                null); //The sort order
+        if (cursor != null) {
+            cursor.moveToNext();
+
+            User e = new User(Integer.parseInt(cursor.getString(0)), cursor.getString(1), cursor.getString(2), cursor.getString(3));
+            // return Employee
+            return e;
+        }else{
+            return null;
+        }
+        }
+
     public Match getMatch(int id) {
 
         SQLiteDatabase db = this.getWritableDatabase();
@@ -269,6 +297,12 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         // delete user record by id
         db.delete(TABLE_USER, COLUMN_USER_ID + " = ?",
                 new String[]{String.valueOf(user.getId())});
+        db.close();
+    }
+
+    public void deleteAllMatches(){
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.execSQL("delete from "+ table_matches);
         db.close();
     }
 

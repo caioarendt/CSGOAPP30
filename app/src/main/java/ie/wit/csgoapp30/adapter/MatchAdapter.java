@@ -1,5 +1,6 @@
 package ie.wit.csgoapp30.adapter;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -14,6 +15,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import ie.wit.csgoapp30.R;
+import ie.wit.csgoapp30.activities.Edit;
+import ie.wit.csgoapp30.activities.Main;
+import ie.wit.csgoapp30.activities.Register;
 import ie.wit.csgoapp30.models.Match;
 import ie.wit.csgoapp30.sqllite.DatabaseHelper;
 
@@ -62,6 +66,10 @@ public class MatchAdapter extends ArrayAdapter<Match> {
                             public void onClick(DialogInterface dialog, int id) {
                                 DatabaseHelper db = new DatabaseHelper(context);
                                 db.removeMatch(db.getMatch(view.getId()));
+                                if(context instanceof Activity){
+                                    ((Activity)context).finish();
+                                    ((Activity)context).startActivity(new Intent(((Activity)context), Main.class));
+                                }
                             }
                         });
 
@@ -75,6 +83,23 @@ public class MatchAdapter extends ArrayAdapter<Match> {
 
                 AlertDialog alert = confirmation.create();
                 alert.show();
+            }
+        });
+
+        ImageView imgEdit = (ImageView) view.findViewById(R.id.imgEdit);
+
+        imgEdit.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                DatabaseHelper db = new DatabaseHelper(context);
+                int matchid = view.getId();
+                Intent intent=new Intent(v.getContext(), Edit.class);
+                intent.putExtra("matchid",matchid);
+                if(context instanceof Activity) {
+                    ((Activity) context).finish();
+                    v.getContext().startActivity(intent);
+                }
             }
         });
 

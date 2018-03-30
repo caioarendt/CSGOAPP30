@@ -72,11 +72,11 @@ public class Match {
     }
 
     public String toString(){
-        return "-Match ID : " +getMatchID()+ "\n"+
-                "-Team1 : " +getTeam1()+ "\n" +
-                "-Team2 : "+getTeam2() + "\n" +
-                "-Date : "+getDate() + "\n" +
-                "-Time : "+getTime();
+        return "Match ID : " +getMatchID()+ "\n"+
+                "Team1 : " +getTeam1()+ "\n" +
+                "Team2 : "+getTeam2() + "\n" +
+                "Date : "+getDate() + "\n" +
+                "Time : "+getTime();
 
 
     }

@@ -14,6 +14,8 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import ie.wit.csgoapp30.models.User;
+import ie.wit.csgoapp30.session.Session;
 import ie.wit.csgoapp30.sqllite.DatabaseHelper;
 
 import org.w3c.dom.Text;
@@ -31,6 +33,7 @@ public class Login extends AppCompatActivity {
     private TextView txtPassword;
     private DatabaseHelper databaseHelper;
     private InputValidation inputValidation;
+    private Session session;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,6 +51,7 @@ public class Login extends AppCompatActivity {
             }
         });
 
+        session = new Session(this);
         initViews();
         initObjects();
 
@@ -89,6 +93,12 @@ public class Login extends AppCompatActivity {
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
+        switch(id){
+            case R.id.action_register:
+                finish();
+                startActivity (new Intent(this, Register.class));
+                break;
+        }
         //noinspection SimplifiableIfStatement
         return super.onOptionsItemSelected(item);
     }
@@ -96,10 +106,13 @@ public class Login extends AppCompatActivity {
     public void login(View view){
         if(inputValidation.isValidEmail(edtEmail.getText().toString()) || !inputValidation.isStringEmpty(edtEmail.getText().toString()) || !inputValidation.isStringEmpty(edtPassword.getText().toString())){
             if(databaseHelper.checkUser(edtEmail.getText().toString().trim(), edtPassword.getText().toString().trim())){
-                Intent intent = new Intent(this, Main.class);
-                intent.putExtra("email", edtEmail.getText().toString().trim());
+
+                User user;
+                user = databaseHelper.getUser(edtEmail.getText().toString().trim());
+                session.setName(user.getName());
+                databaseHelper.close();
                 emptyEditText();
-                startActivity(intent);
+                startActivity(new Intent(this, Main.class));
             }else{
                 if(!databaseHelper.checkUser(edtEmail.getText().toString().trim())){
                   edtEmail.setError("Wrong email!");
@@ -113,6 +126,7 @@ public class Login extends AppCompatActivity {
     }
 
     public void register(View view){
+        finish();
         startActivity (new Intent(this, Register.class));
     }
 }

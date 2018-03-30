@@ -2,6 +2,9 @@
     <string name="app_name">CSGOAPP3.0</string>
     <string name="action_main">Main</string>
     <string name="action_create">Create</string>
+    <string name="action_logout">Logout</string>
+    <string name="action_register">Register</string>
+    <string name="action_reset">Reset</string>
     <string name="lbl_email">Email</string>
     <string name="lbl_password">Password</string>
     <string name="hint_email">Email</string>
