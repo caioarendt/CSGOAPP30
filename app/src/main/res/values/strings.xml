@@ -10,6 +10,7 @@
     <string name="hint_email">Email</string>
     <string name="hint_password">Password</string>
     <string name="hint_name">Name</string>
+    <string name="hint_search">Search Term</string>
     <string name="lbl_login">Login</string>
     <string name="lbl_register">Register</string>
     <string name="lbl_cancel">Cancel</string>

@@ -10,6 +10,7 @@ import android.content.Context;
 import java.util.List;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -25,7 +26,7 @@ import ie.wit.csgoapp30.sqllite.DatabaseHelper;
  * Created by caio_ on 3/13/2018.
  */
 
-public class MatchAdapter extends ArrayAdapter<Match> {
+public class MatchAdapter extends ArrayAdapter<Match> implements Filterable{
     private Context context;
     public List<Match> matches;
 

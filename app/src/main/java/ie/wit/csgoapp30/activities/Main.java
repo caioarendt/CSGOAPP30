@@ -10,9 +10,12 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -31,9 +34,11 @@ public class Main extends AppCompatActivity {
     private ListView listView;
     private DatabaseHelper db;
     List<Match> matches;
+    private MatchAdapter adapter;
     private TextView txtGreetings;
     private Session session;
     private String email;
+    private EditText edtSearch;
 
 
     @Override
@@ -53,14 +58,35 @@ public class Main extends AppCompatActivity {
 
         listView = (ListView) findViewById(R.id.lstMatches);
         txtGreetings = (TextView) findViewById(R.id.txtGreetings);
+        edtSearch = (EditText) findViewById(R.id.edtSearch);
+
         session = new Session(this);
         txtGreetings.setText("Welcome " + session.getName());
 
         db = new DatabaseHelper(this);
         matches = db.getAllMatches();
 
-        MatchAdapter adapter = new MatchAdapter(this, matches);
+        adapter = new MatchAdapter(this, matches);
         listView.setAdapter(adapter);
+        listView.setTextFilterEnabled(true);
+
+        edtSearch.addTextChangedListener(new TextWatcher() {
+
+            public void onTextChanged(CharSequence arg0, int arg1, int arg2,
+                                      int arg3) {
+                Main.this.adapter.getFilter().filter(arg0.toString());
+            }
+
+            public void beforeTextChanged(CharSequence arg0, int arg1,
+                                          int arg2, int arg3) {
+
+            }
+
+            public void afterTextChanged(Editable arg0) {
+
+            }
+        });
+
 
     }
 
