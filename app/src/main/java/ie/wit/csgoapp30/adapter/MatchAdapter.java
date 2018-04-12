@@ -116,6 +116,8 @@ public class MatchAdapter extends ArrayAdapter<Match> implements Filterable{
         return view;
     }
 
+    // http://www.camposha.info/source/android-custom-filtersearch-listview-listview-images-text-baseadapter-source
+
     @Override
     public Filter getFilter() {
         // TODO Auto-generated method stub
@@ -148,7 +150,7 @@ public class MatchAdapter extends ArrayAdapter<Match> implements Filterable{
                 {
                     if(filterList.get(i).getTeam1().toUpperCase().contains(constraint) || filterList.get(i).getTeam2().toUpperCase().contains(constraint) || filterList.get(i).getDate().toUpperCase().contains(constraint) || filterList.get(i).getTime().toUpperCase().contains(constraint))
                     {
-                        Match p=new Match(filterList.get(i).getTeam1(), filterList.get(i).getTeam2(), filterList.get(i).getDate(), filterList.get(i).getTime());
+                        Match p=new Match(filterList.get(i).getMatchID(), filterList.get(i).getTeam1(), filterList.get(i).getTeam2(), filterList.get(i).getDate(), filterList.get(i).getTime());
 
                         filters.add(p);
                     }
