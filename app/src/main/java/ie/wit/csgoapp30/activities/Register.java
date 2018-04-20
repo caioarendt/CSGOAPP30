@@ -54,6 +54,7 @@ public class Register extends AppCompatActivity {
             Toast t = Toast.makeText(this, user.getName().toString() + " registered!", Toast.LENGTH_SHORT);
             t.show();
             finish();
+            startActivity(new Intent(this, Login.class));
         }
     }
 
