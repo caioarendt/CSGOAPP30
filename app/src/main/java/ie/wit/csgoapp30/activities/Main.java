@@ -1,13 +1,10 @@
 package ie.wit.csgoapp30.activities;
 
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.provider.ContactsContract;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.Editable;
@@ -16,7 +13,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -28,6 +24,9 @@ import ie.wit.csgoapp30.adapter.MatchAdapter;
 import ie.wit.csgoapp30.models.Match;
 import ie.wit.csgoapp30.session.Session;
 import ie.wit.csgoapp30.sqllite.DatabaseHelper;
+
+
+//Android Tutorials Hub. (2018). Android Login and Register with SQLite Database Tutorial - Android Tutorials Hub. [online] Available at: http://www.androidtutorialshub.com/android-login-and-register-with-sqlite-database-tutorial/ [Accessed 24 Apr. 2018].
 
 public class Main extends AppCompatActivity {
 
@@ -107,17 +106,39 @@ public class Main extends AppCompatActivity {
         //noinspection SimplifiableIfStatement
         switch(id){
             case R.id.action_logout:
-                finish();
-                startActivity (new Intent(this, Login.class));
+                AlertDialog.Builder confirmation = new AlertDialog.Builder(this);
+                confirmation.setMessage("Are you sure you want to logout?");
+                confirmation.setCancelable(true);
+
+                confirmation.setPositiveButton(
+                        "Yes",
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                finish();
+                                startActivity (new Intent(getApplicationContext(), Login.class));
+                            }
+                        });
+
+                confirmation.setNegativeButton(
+                        "No",
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                dialog.cancel();
+                            }
+                        });
+
+                AlertDialog alert = confirmation.create();
+                alert.show();
+
                 break;
             case R.id.action_reset:
                 if(!matches.isEmpty()) {
 
-                    AlertDialog.Builder confirmation = new AlertDialog.Builder(this);
-                    confirmation.setMessage("Are you sure you want to delete all matches?");
-                    confirmation.setCancelable(true);
+                    AlertDialog.Builder confirmation2 = new AlertDialog.Builder(this);
+                    confirmation2.setMessage("Are you sure you want to delete all matches?");
+                    confirmation2.setCancelable(true);
 
-                    confirmation.setPositiveButton(
+                    confirmation2.setPositiveButton(
                             "Yes",
                             new DialogInterface.OnClickListener() {
                                 public void onClick(DialogInterface dialog, int id) {
@@ -128,7 +149,7 @@ public class Main extends AppCompatActivity {
                                 }
                             });
 
-                    confirmation.setNegativeButton(
+                    confirmation2.setNegativeButton(
                             "No",
                             new DialogInterface.OnClickListener() {
                                 public void onClick(DialogInterface dialog, int id) {
@@ -136,10 +157,8 @@ public class Main extends AppCompatActivity {
                                 }
                             });
 
-                    AlertDialog alert = confirmation.create();
-                    alert.show();
-
-
+                    AlertDialog alert2 = confirmation2.create();
+                    alert2.show();
                     break;
                 }else{
                     Toast t = Toast.makeText(this, "Nothing to delete!", Toast.LENGTH_SHORT);

@@ -2,28 +2,24 @@ package ie.wit.csgoapp30.adapter;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.view.LayoutInflater;
-import android.widget.ArrayAdapter;
-import android.content.Context;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Locale;
-
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import ie.wit.csgoapp30.R;
 import ie.wit.csgoapp30.activities.Edit;
 import ie.wit.csgoapp30.activities.Main;
-import ie.wit.csgoapp30.activities.Register;
 import ie.wit.csgoapp30.models.Match;
 import ie.wit.csgoapp30.sqllite.DatabaseHelper;
 
@@ -129,6 +125,8 @@ public class MatchAdapter extends ArrayAdapter<Match> implements Filterable{
         return filter;
     }
 
+    // Android, C. (2014). Custom Listview Adapter with filter Android. [online] Stackoverflow.com. Available at: https://stackoverflow.com/questions/24769257/custom-listview-adapter-with-filter-android?utm_medium=organic&utm_source=google_rich_qa&utm_campaign=google_rich_qa [Accessed 24 Apr. 2018].
+
     class CustomFilter extends Filter
     {
 
@@ -140,7 +138,7 @@ public class MatchAdapter extends ArrayAdapter<Match> implements Filterable{
 
             if(constraint != null && constraint.length()>0)
             {
-                //CONSTARINT TO UPPER
+                //CONSTRAINT TO UPPER
                 constraint=constraint.toString().toUpperCase();
 
                 ArrayList<Match> filters=new ArrayList<Match>();

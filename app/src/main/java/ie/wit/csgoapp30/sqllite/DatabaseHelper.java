@@ -1,17 +1,19 @@
 package ie.wit.csgoapp30.sqllite;
 
-import android.database.sqlite.SQLiteDatabase;
-
-import ie.wit.csgoapp30.models.Match;
-import ie.wit.csgoapp30.models.User;
-
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+
 import java.util.ArrayList;
 import java.util.List;
+
+import ie.wit.csgoapp30.models.Match;
+import ie.wit.csgoapp30.models.User;
+
+//Android Tutorials Hub. (2018). Android Login and Register with SQLite Database Tutorial - Android Tutorials Hub. [online] Available at: http://www.androidtutorialshub.com/android-login-and-register-with-sqlite-database-tutorial/ [Accessed 24 Apr. 2018].
+
 
 public class DatabaseHelper extends SQLiteOpenHelper {
 
@@ -71,6 +73,12 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
         db.execSQL(CREATE_USER_TABLE);
         db.execSQL(CREATE_TABLE_MATCHES);
+        db.execSQL("insert into user values (1, 'Admin', 'admin@admin.com', 'admin')");
+        db.execSQL("insert into user values (2, 'Admin2', 'admin2@admin.com', 'admin2')");
+        db.execSQL("insert into user values (3, 'Admin3', 'admin3@admin.com', 'admin3')");
+        db.execSQL("insert into matches values (1, 'SK', 'Cloud9', '12-5-2018', '15:50')");
+        db.execSQL("insert into matches values (2, 'FaZe', 'NaVi', '15-5-2018', '15:30')");
+        db.execSQL("insert into matches values (3, 'Fnatic', 'NiP', '18-5-2018', '15:40')");
     }
 
 

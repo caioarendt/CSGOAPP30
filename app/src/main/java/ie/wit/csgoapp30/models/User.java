@@ -1,7 +1,5 @@
 package ie.wit.csgoapp30.models;
 
-import android.content.Context;
-
 /**
  * Created by caio_ on 3/23/2018.
  */

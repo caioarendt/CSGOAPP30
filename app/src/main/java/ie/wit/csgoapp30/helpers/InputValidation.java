@@ -2,7 +2,6 @@ package ie.wit.csgoapp30.helpers;
 
 import android.content.Context;
 import android.text.TextUtils;
-import android.util.Patterns;
 
 /**
  * Created by caio_ on 3/29/2018.

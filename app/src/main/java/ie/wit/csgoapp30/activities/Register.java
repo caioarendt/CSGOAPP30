@@ -1,8 +1,8 @@
 package ie.wit.csgoapp30.activities;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -41,6 +41,9 @@ public class Register extends AppCompatActivity {
             t.show();
         }else if(!inputValidation.isEqual(edtPassword.getText().toString(), edtPassword2.getText().toString())) {
             Toast t = Toast.makeText(this, "Passwords do not match!", Toast.LENGTH_SHORT);
+            t.show();
+        }else if (edtPassword.getText().toString().length()<5){
+            Toast t = Toast.makeText(this, "Passwords too short! minimum of 5 characters", Toast.LENGTH_SHORT);
             t.show();
         }else if(databaseHelper.checkUser(edtEmail.getText().toString())){
             Toast t = Toast.makeText(this, "Email already registered!", Toast.LENGTH_SHORT);

@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">CSGOAPP3.0</string>
+    <string name="app_name">CS:GO Matches</string>
     <string name="action_main">Main</string>
     <string name="action_create">Create</string>
     <string name="action_logout">Logout</string>
@@ -16,7 +16,7 @@
     <string name="lbl_cancel">Cancel</string>
     <string name="lbl_name">Name</string>
     <string name="lbl_conf_password">Confirm your password</string>
-    <string name="title_activity_main">Main</string>
+    <string name="title_activity_main">CS:GO Matches</string>
     <string name="lblCreate">Create</string>
     <string name="lblEdit">Edit</string>
     <string name="lblDisplay">Display</string>
@@ -31,5 +31,5 @@
     <string name="lblSave">Save</string>
     <string name="lblSelectToEdit">Select match to edit</string>
     <string name="lblSelectToDel">Select match to delete</string>
-    <string name="title_activity_main2">Main2Activity</string>
+    <string name="title_activity_main2">CS:GO Matches</string>
 </resources>

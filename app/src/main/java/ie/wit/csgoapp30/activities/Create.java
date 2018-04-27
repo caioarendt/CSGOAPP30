@@ -5,16 +5,22 @@ package ie.wit.csgoapp30.activities;
  * Android tutorials for hassle-free android development and programming. (2018). Android SQLite Database Tutorial - CRUD Operations. [online] Available at: https://www.androidtutorialpoint.com/storage/android-sqlite-database-tutorial/ [Accessed 2 Mar. 2018].
  */
 
+import android.app.DatePickerDialog;
+import android.app.TimePickerDialog;
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.TimePicker;
 import android.widget.Toast;
-import java.text.SimpleDateFormat;
+
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 
 import ie.wit.csgoapp30.R;
 import ie.wit.csgoapp30.models.Match;
@@ -80,12 +86,6 @@ public class Create extends AppCompatActivity {
         if(team1.trim().isEmpty() || team2.trim().isEmpty() || date.trim().isEmpty() || time.trim().isEmpty()){
             Toast t = Toast.makeText(this, "Error ! Please fill in all the data", Toast.LENGTH_SHORT);
             t.show();
-        }else if(!isValidDate(date)) {
-            Toast t = Toast.makeText(this, "Error ! Please enter a valid date", Toast.LENGTH_SHORT);
-            t.show();
-        }else if(!isValidTime(time)) {
-            Toast t = Toast.makeText(this, "Error ! Please enter a valid time", Toast.LENGTH_SHORT);
-            t.show();
         }else{
             newMatch.setTeam1(team1);
             newMatch.setTeam2(team2);
@@ -103,38 +103,42 @@ public class Create extends AppCompatActivity {
 
     }
 
-    public static boolean isValidTime(String time){
-        String[] septime = time.split(":");
-        if(septime.length  != 2){
-            return false;
-        } else if(Integer.parseInt(septime[0]) > 23 || Integer.parseInt(septime[0]) < 0 || Integer.parseInt(septime[1]) < 0 || Integer.parseInt(septime[1]) >59) {
-            return false;
-        }else{
-            return true;
-        }
-
-    }
-
-
-    /**
-     *  Java, R. (2018). Regex date format validation on Java. [online] Stackoverflow.com. Available at: https://stackoverflow.com/questions/2149680/regex-date-format-validation-on-java [Accessed 2 Mar. 2018].
-     *  */
-    public static boolean isValidDate(String text) {
-        if (text == null || !text.matches("[0-3]\\d-[01]\\d-\\d{4}"))
-            return false;
-        SimpleDateFormat df = new SimpleDateFormat("dd-MM-yyyy");
-        df.setLenient(false);
-        try {
-            df.parse(text);
-            return true;
-        } catch (ParseException ex) {
-            return false;
-        }
-    }
-
-
     public void Cancel(View view){
         finish();
         startActivity(new Intent(this, Main.class));
+    }
+
+    // https://stackoverflow.com/questions/17901946/timepicker-dialog-from-clicking-edittext?utm_medium=organic&utm_source=google_rich_qa&utm_campaign=google_rich_qa
+    public void Calendar(View view){
+        Calendar mcurrentDate = Calendar.getInstance();
+        int mYear = mcurrentDate.get(Calendar.YEAR);
+        int mMonth = mcurrentDate.get(Calendar.MONTH);
+        int mDay = mcurrentDate.get(Calendar.DAY_OF_MONTH);
+
+        DatePickerDialog mDatePicker;
+        mDatePicker = new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
+            public void onDateSet(DatePicker datepicker, int selectedyear, int selectedmonth, int selectedday) {
+                // TODO Auto-generated method stub
+                    /*      Your code   to get date and time    */
+                edtDate.setText(selectedday + "-" + selectedmonth + "-" + selectedyear);
+            }
+        }, mYear, mMonth, mDay);
+        mDatePicker.setTitle("Select Date");
+        mDatePicker.show();
+    }
+
+    public void Clock(View view){
+        Calendar mcurrentTime = Calendar.getInstance();
+        int hour = mcurrentTime.get(Calendar.HOUR_OF_DAY);
+        int minute = mcurrentTime.get(Calendar.MINUTE);
+        TimePickerDialog mTimePicker;
+        mTimePicker = new TimePickerDialog(this, new TimePickerDialog.OnTimeSetListener() {
+            @Override
+            public void onTimeSet(TimePicker timePicker, int selectedHour, int selectedMinute) {
+                edtTime.setText( selectedHour + ":" + selectedMinute);
+            }
+        }, hour, minute, true);//Yes 24 hour time
+        mTimePicker.setTitle("Select Time");
+        mTimePicker.show();
     }
 }

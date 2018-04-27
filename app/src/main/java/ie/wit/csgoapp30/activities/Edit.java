@@ -5,9 +5,11 @@ package ie.wit.csgoapp30.activities;
  * Android tutorials for hassle-free android development and programming. (2018). Android SQLite Database Tutorial - CRUD Operations. [online] Available at: https://www.androidtutorialpoint.com/storage/android-sqlite-database-tutorial/ [Accessed 2 Mar. 2018].
  */
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -17,11 +19,8 @@ import android.widget.Toast;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
-import android.app.AlertDialog;
-import android.content.DialogInterface;
-
-import ie.wit.csgoapp30.models.Match;
 import ie.wit.csgoapp30.R;
+import ie.wit.csgoapp30.models.Match;
 import ie.wit.csgoapp30.sqllite.DatabaseHelper;
 
 public class Edit extends AppCompatActivity {
