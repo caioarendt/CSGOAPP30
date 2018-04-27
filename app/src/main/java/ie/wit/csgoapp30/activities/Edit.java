@@ -6,6 +6,8 @@ package ie.wit.csgoapp30.activities;
  */
 
 import android.app.AlertDialog;
+import android.app.DatePickerDialog;
+import android.app.TimePickerDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -13,11 +15,14 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.TimePicker;
 import android.widget.Toast;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 
 import ie.wit.csgoapp30.R;
 import ie.wit.csgoapp30.models.Match;
@@ -98,12 +103,6 @@ public class Edit extends AppCompatActivity {
         if(team1.trim().isEmpty() || team2.trim().isEmpty() || date.trim().isEmpty() || time.trim().isEmpty()){
             Toast t = Toast.makeText(this, "Error ! Please fill in all the data", Toast.LENGTH_SHORT);
             t.show();
-        }else if(!isValidDate(date)) {
-            Toast t = Toast.makeText(this, "Error ! Please enter a valid date", Toast.LENGTH_SHORT);
-            t.show();
-        }else if(!isValidTime(time)) {
-            Toast t = Toast.makeText(this, "Error ! Please enter a valid time", Toast.LENGTH_SHORT);
-            t.show();
         }else{
             AlertDialog.Builder builder1 = new AlertDialog.Builder(Edit.this);
             builder1.setMessage("Are you sure you want to save the changes?");
@@ -174,5 +173,39 @@ public class Edit extends AppCompatActivity {
         Intent intent = new Intent(this, Main.class);
         intent.putExtra("email", email);
         startActivity(intent);
+    }
+
+    // https://stackoverflow.com/questions/17901946/timepicker-dialog-from-clicking-edittext?utm_medium=organic&utm_source=google_rich_qa&utm_campaign=google_rich_qa
+    public void Calendar(View view){
+        String[] date = edtDate.getText().toString().split("-");
+        int mDay = Integer.parseInt(date[0]);
+        int mMonth = Integer.parseInt(date[1]) - 1;
+        int mYear = Integer.parseInt(date[2]);
+        DatePickerDialog mDatePicker;
+        mDatePicker = new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
+            public void onDateSet(DatePicker datepicker, int selectedyear, int selectedmonth, int selectedday) {
+                // TODO Auto-generated method stub
+                    /*      Your code   to get date and time    */
+                selectedmonth += 1;
+                edtDate.setText(selectedday + "-" + selectedmonth + "-" + selectedyear);
+            }
+        }, mYear, mMonth, mDay);
+        mDatePicker.setTitle("Select Date");
+        mDatePicker.show();
+    }
+
+    public void Clock(View view){
+        String[] time = edtTime.getText().toString().split(":");
+        int hour = Integer.parseInt(time[0]);
+        int minute = Integer.parseInt(time[1]);
+        TimePickerDialog mTimePicker;
+        mTimePicker = new TimePickerDialog(this, new TimePickerDialog.OnTimeSetListener() {
+            @Override
+            public void onTimeSet(TimePicker timePicker, int selectedHour, int selectedMinute) {
+                edtTime.setText( selectedHour + ":" + selectedMinute);
+            }
+        }, hour, minute, true);//Yes 24 hour time
+        mTimePicker.setTitle("Select Time");
+        mTimePicker.show();
     }
 }

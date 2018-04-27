@@ -111,15 +111,23 @@ public class Create extends AppCompatActivity {
     // https://stackoverflow.com/questions/17901946/timepicker-dialog-from-clicking-edittext?utm_medium=organic&utm_source=google_rich_qa&utm_campaign=google_rich_qa
     public void Calendar(View view){
         Calendar mcurrentDate = Calendar.getInstance();
-        int mYear = mcurrentDate.get(Calendar.YEAR);
-        int mMonth = mcurrentDate.get(Calendar.MONTH);
-        int mDay = mcurrentDate.get(Calendar.DAY_OF_MONTH);
-
+        int mYear, mMonth, mDay;
+        if(edtDate.getText().toString().isEmpty()) {
+            mYear = mcurrentDate.get(Calendar.YEAR);
+            mMonth = mcurrentDate.get(Calendar.MONTH);
+            mDay = mcurrentDate.get(Calendar.DAY_OF_MONTH);
+        }else{
+            String[] date = edtDate.getText().toString().split("-");
+            mDay = Integer.parseInt(date[0]);
+            mMonth = Integer.parseInt(date[1]) - 1;
+            mYear = Integer.parseInt(date[2]);
+        }
         DatePickerDialog mDatePicker;
         mDatePicker = new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
             public void onDateSet(DatePicker datepicker, int selectedyear, int selectedmonth, int selectedday) {
                 // TODO Auto-generated method stub
                     /*      Your code   to get date and time    */
+                    selectedmonth += 1;
                 edtDate.setText(selectedday + "-" + selectedmonth + "-" + selectedyear);
             }
         }, mYear, mMonth, mDay);
